@@ -76,3 +76,92 @@ testuser@6bee01ea21ce:/var/workloader/linux/linux-v8.24.6$ sudo ./workloader com
 2022-08-26 14:02:22  [INFO] - compatibility completed
 ```
 
+
+
+
+
+# Part 2
+
+* Example line-by-line from after deploying the container
+```
+docker run -d -p 2022:22 --name workloader-ssh ansred/ubuntu-workloader-ssh
+```
+
+and then ssh to it
+```
+ssh -p 2022 testuser@10.0.12.201
+[node2] (local) root@192.168.0.17 /
+
+$ ssh -p 2022 testuser@192.168.0.17
+The authenticity of host '[192.168.0.17]:2022 ([192.168.0.17]:2022)' can't be established.
+ED25519 key fingerprint is SHA256:xwKyyoIhts9yj7uYSW52wwgjTrsvIFUlgrFjSvLsCJ8.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '[192.168.0.17]:2022' (ED25519) to the list of known hosts.
+testuser@192.168.0.17's password: 
+Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 4.4.0-210-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+```
+
+* To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+```
+testuser@cbb6351f6db8:~$ sudo su -
+[sudo] password for testuser: 
+root@cbb6351f6db8:~# 
+root@cbb6351f6db8:~# ls
+root@cbb6351f6db8:~# cd /var/workloader/linux/linux-v8.24.6/
+root@cbb6351f6db8:/var/workloader/linux/linux-v8.24.6# ls
+illumio-templates  workload-identifier-default.csv  workloader
+root@cbb6351f6db8:/var/workloader/linux/linux-v8.24.6# printf "
+debug: false
+default_pce_name: pce-illumio-com
+max_entries_for_stdout: 100
+no_prompt: false
+output_format: both
+pce-illumio-com:
+    disabletlschecking: false
+    fqdn: pce.illumio.com
+    key: 4e7ce63a4329890a9afacb9accd8821
+    org: 1
+    port: 443
+    user: api_126220928cc25f
+    userhref: /users/1
+target_pce: pce-illumio-com
+update_pce: false
+verbose: false
+
+" >> pce.yaml
+```
+
+```
+root@cbb6351f6db8:/var/workloader/linux/linux-v8.24.6# ls
+illumio-templates  pce.yaml  workload-identifier-default.csv  workloader
+```
+```
+root@cbb6351f6db8:/var/workloader/linux/linux-v8.24.6# ./workloader -h      
+
+Workloader is a tool that helps manage resources in an Illumio PCE.
+
+  Usage:
+        workloader [command]
+```
+
+
+
+
