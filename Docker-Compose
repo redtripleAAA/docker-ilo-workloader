@@ -1,0 +1,11 @@
+```
+#################################################
+version: '3.3'
+services:
+    ubuntu-workloader-ssh:
+        ports:
+            - '2022:22' # To be used for SSH to the container and ssh -p 2022 testuser@10.0.12.201 and password is "testpassword"
+        container_name: workloader-ssh
+        image: ansred/ubuntu-workloader-ssh
+#################################################
+```
