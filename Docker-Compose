@@ -1,4 +1,3 @@
-```
 #################################################
 version: '3.3'
 services:
@@ -8,4 +7,3 @@ services:
         container_name: workloader-ssh
         image: ansred/ubuntu-workloader-ssh
 #################################################
-```
