@@ -9,7 +9,9 @@
 # Note this flag if you wish delete the container when it stops --rm "docker run --rm -d -p 2022:22 --name workloader-ssh ansred/ubuntu-workloader-ssh"
 # Example ssh -p 2022 testuser@10.0.12.201
 # This dockerfile will automatically downloaded the latest linux repo for workloader from github and extract it for you to use at # /var/workloader/linux/linux-v8.24.6
-#!/bin/bash
+# To build this Dockerfile # docker build -t ansred/ubuntu-workloader-ssh . --no-cache=true
+# To push this Docker image # docker push ansred/ubuntu-workloader-ssh
+# Maintainer Anas Hamra | anas.hamra@gmail.com
 ##################################################################################################
 #image ansred/ubuntu-workloader-ssh
 #!/bin/bash
