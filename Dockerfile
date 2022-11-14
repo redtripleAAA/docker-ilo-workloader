@@ -3,14 +3,17 @@
 # Published Docker image can be used from Dockerhub # ansred/ubuntu-workloader-ssh # https://hub.docker.com/repository/docker/ansred/ubuntu-workloader-ssh
 # This docker file will use Ubuntu AMD64 image and install all utility packages, inlcuding OpenSSH Server to access to the server # user= testuser # password=testpassword and port exposed 22
 # You can build this dockerfile (Make sure to change credentials used for OpenSSH 
-# Make sure to edit pce.yaml as well with your Workloader information of simply used pce-add command
-# Tip # You can use to test the dockerhub test image # https://labs.play-with-docker.com/
+# Make sure to edit pce.yaml as well with your Workloader information of simply used pce-add -h command
+# Tip # Test the dockerhub test image # https://labs.play-with-docker.com/
 # Just run # "docker run -d -p 2022:22 --name workloader-ssh ansred/ubuntu-workloader-ssh"
+# To use a network # "docker run -d -p 2022:22 --name workloader-ssh --network=Projects_Core ansred/ubuntu-workloader-ssh"
 # Note this flag if you wish delete the container when it stops --rm "docker run --rm -d -p 2022:22 --name workloader-ssh ansred/ubuntu-workloader-ssh"
 # Example ssh -p 2022 testuser@10.0.12.201
-# This dockerfile will automatically downloaded the latest linux repo for workloader from github and extract it for you to use at # /var/workloader/linux/linux-v8.24.6
+#
+# This dockerfile will automatically download the latest linux repo for workloader from github and extract it for you to use at # /var/workloader/linux/linux*
 # To build this Dockerfile # docker build -t ansred/ubuntu-workloader-ssh . --no-cache=true
 # To push this Docker image # docker push ansred/ubuntu-workloader-ssh
+#
 # Maintainer Anas Hamra | anas.hamra@gmail.com
 ##################################################################################################
 #image ansred/ubuntu-workloader-ssh
