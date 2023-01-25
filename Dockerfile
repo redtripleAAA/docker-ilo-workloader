@@ -13,6 +13,7 @@
 # This dockerfile will automatically download the latest linux repo for workloader from github and extract it for you to use at # /var/workloader/linux/linux*
 # To build this Dockerfile # docker build -t ansred/ubuntu-workloader-ssh . --no-cache=true
 # To push this Docker image # docker push ansred/ubuntu-workloader-ssh
+# ONE LINE # docker build -t ansred/ubuntu-workloader-ssh . --no-cache=true && docker push ansred/ubuntu-workloader-ssh
 #
 # Maintainer Anas Hamra | anas.hamra@gmail.com
 ##################################################################################################
@@ -33,15 +34,14 @@ ENV TERM linux
 ENV DEBIAN_FRONTEND noninteractive
 #################################################
 #Create directory for Workloader linux
-RUN cd /var
-RUN mkdir /var/workloader
-RUN mkdir /var/workloader/linux
+RUN mkdir -p /var/workloader/linux
 
-RUN cd /var/workloader/linux && curl https://api.github.com/repos/brian1917/workloader/releases/latest | grep "browser_download_url.*linux.*.zip" | cut -d ':' -f 2,3 | tr -d \" | wget -O workloader-linux.zip -qi -
-RUN cd /var/workloader/linux && unzip workloader-linux.zip
-RUN cd /var/workloader/linux/linux*
+WORKDIR /var/workloader/linux
+
+RUN curl https://api.github.com/repos/brian1917/workloader/releases/latest | grep "browser_download_url.*linux.*.zip" | cut -d ':' -f 2,3 | tr -d \" | wget -O workloader-linux.zip -qi -
+RUN unzip workloader-linux.zip
 RUN cd /var/workloader/linux/linux* && ./workloader version
-RUN chmod -R 777 /var/workloader/linux
+RUN chmod -R 777 /var/workloader/linux/
 
 CMD ["/usr/sbin/sshd","-D"]
 ##################################################################################################
