@@ -84,7 +84,7 @@ testuser@6bee01ea21ce:/var/workloader/linux/linux-v8.24.6$ sudo ./workloader com
 
 * Example line-by-line from after deploying the container
 ```
-docker run -d -p 2022:22 --name workloader-ssh ansred/ubuntu-workloader-ssh
+docker run -d -p 2022:22 --name workloader-ssh --hostname workloadeer ansred/ubuntu-workloader-ssh
 ```
 
 and then ssh to it
